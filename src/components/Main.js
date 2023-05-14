@@ -1,6 +1,6 @@
-import './App.css';
+import '../blocks/main/Main.css';
 
-function App() {
+function Main() {
   return (
     <div>
       <div id="DIV_1">
@@ -298,4 +298,4 @@ function App() {
   );
 }
 
-export default App;
+export default Main;
