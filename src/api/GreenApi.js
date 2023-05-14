@@ -1,4 +1,4 @@
-class Api {
+class GreenApi {
     constructor({baseUrl, headers}) {
       this._baseUrl = baseUrl;
       this._headers = headers
@@ -8,8 +8,8 @@ class Api {
         return (res.ok) ? (res.json()) : (Promise.reject(`Ошибка: ${res.status}`))
     }
     
-    sendMessage(chatId, message, quotedMessageId, archiveChat, linkPreview) {
-        return fetch(`${this._baseUrl}/waInstance{{idInstance}}/SendMessage/{{apiTokenInstance}}`, {
+    sendMessage(idInstance, apiTokenInstance, chatId, message, quotedMessageId, archiveChat, linkPreview) {
+        return fetch(`${this._baseUrl}/waInstance${idInstance}/SendMessage/${apiTokenInstance}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -19,8 +19,8 @@ class Api {
         .then(this._handleResponse)
     }
 
-    receiveNotification() {
-        return fetch(`${this._baseUrl}/waInstance{{idInstance}}/ReceiveNotification/{{apiTokenInstance}}`, {
+    receiveNotification(idInstance, apiTokenInstance) {
+        return fetch(`${this._baseUrl}/waInstance${idInstance}/ReceiveNotification/${apiTokenInstance}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -30,8 +30,8 @@ class Api {
         .then(this._handleResponse)
     }
 
-    deleteNotification(receiptId) {
-        return fetch(`${this._baseUrl}/waInstance{{idInstance}}/DeleteNotification/{{apiTokenInstance}}/${receiptId}`, {
+    deleteNotification(idInstance, apiTokenInstance, receiptId) {
+        return fetch(`${this._baseUrl}/waInstance${idInstance}/DeleteNotification/${apiTokenInstance}/${receiptId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,11 +42,11 @@ class Api {
     }
 }
   
-const api = new Api({
+const greenApi = new GreenApi({
     baseUrl: 'https://api.green-api.com',
     headers: {
       'Content-Type': 'application/json'
     }
 });
   
-export default api;
+export default greenApi;
